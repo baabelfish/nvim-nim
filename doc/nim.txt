@@ -72,14 +72,14 @@ CONTENTS                                                   *nim-contents*
 ------------------------------------------------------------------------------
 2.1.Syntax highlighting                                     *NimSyntaxHL*
 
-2.1.1Intelligent with nimsuggest                            *NimSyntaxHLI*
+2.1.1.Intelligent with nimsuggest                           *NimSyntaxHLI*
 
 Nimsuggest has the ability to highlight symbols in a buffer intelligently.
 When you declare your on proc it gives you the highlight information for
 every usage of that proc. When your routine call fails, your syntax
 highlighting will fail too.
 
-2.1.2.Semantic highlighting                                  *NimSyntaxHLI*
+2.1.2.Semantic highlighting                                 *NimSyntaxHLS*
 
 With the nimsuggest highlihgting it is possible to distinguish between
 different symbol types. You can specify which symbol kinds you want to
