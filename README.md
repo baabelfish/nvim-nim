@@ -53,12 +53,12 @@ Easiest way to install this plugin is with a plugin manager:
 
 [vim-plug](https://github.com/junegunn/vim-plug)
 ```viml
-Plug "baabelfish/nvim-nim"
+Plug 'baabelfish/nvim-nim'
 ```
 
 [neobundle](https://github.com/Shougo/neobundle.vim)
 ```viml
-NeoBundle "baabelfish/nvim-nim"
+NeoBundle 'baabelfish/nvim-nim'
 ```
 
 [pathogen](https://github.com/tpope/vim-pathogen)
