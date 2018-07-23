@@ -10,7 +10,7 @@ let s:NimDebugger = {
             \ 'pty': 1,
             \ }
 
-function! s:NimDebugger.on_stdout(job, chunk, ...)
+function! s:NimDebugger.on_stdout(job, chunk, type)
     for line in a:chunk
         " *** endb| reached edb.nim(4) wat ***
         " let matched = matchlist(line, "\\*\\*\\* endb\|\(.*\)$")
@@ -18,11 +18,11 @@ function! s:NimDebugger.on_stdout(job, chunk, ...)
     endfor
 endfunction
 
-function! s:NimDebugger.on_stderr(job, chunk, ...)
+function! s:NimDebugger.on_stderr(job, chunk, type)
     " echoerr "Error" . join(a:chunk, "\n")
 endfunction
 
-function! s:NimDebugger.on_exit(...)
+function! s:NimDebugger.on_exit(job, chunk, type)
     echoerr "Done"
     let s:edb_terminal_job = -2
 endfunction

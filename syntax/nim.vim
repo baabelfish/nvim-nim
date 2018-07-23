@@ -51,14 +51,19 @@ syntax match   nimOP1         "[\*+\/%&]="
 syntax match   nimOP0         "=>"
 syntax match   nimOP0         "\->"
 
-syntax match nimFunction  /[a-z,A-Z,0-9]\+\ze(/
+if !g:nvim_nim_highlighter_async
+    syntax match nimFunction  /[a-z,A-Z,0-9]\+\ze(/
+endif
 
 
 " Comments
 syntax match nimComment "\v#.*$" contains=nimTodo
 syntax region nimComment start="#\+\[" end="\]#\+" contains=nimTodo
-syntax match nimIdentifier /\w\+/
-highlight link nimIdentifier     Identifier
+
+if !g:nvim_nim_highlighter_async
+    syntax match nimIdentifier /\w\+/
+    highlight link nimIdentifier     Identifier
+endif
 
 
 " String

@@ -12,15 +12,15 @@ let s:NimSuggest = {
             \ 'pty': 0,
             \ }
 
-function! s:NimSuggest.on_stdout(job, chunk)
+function! s:NimSuggest.on_stdout(job, chunk, type)
     call extend(self.lines, a:chunk)
 endfunction
 
-function! s:NimSuggest.on_stderr(job, chunk)
+function! s:NimSuggest.on_stderr(job, chunk, type)
 endfunction
 
 
-function! s:NimSuggest.on_exit()
+function! s:NimSuggest.on_exit(job, chunk, type)
     echo ""
     let self.lines = util#FilterCompletions(self.lines)
     if len(self.lines) > 0

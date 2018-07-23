@@ -41,13 +41,13 @@ let s:NimHighlighter = {
             \ }
             " \ 'pty': 1
 
-function! s:NimHighlighter.on_stdout(job, chunk, ...)
+function! s:NimHighlighter.on_stdout(job, chunk, type)
     if len(a:chunk[0]) != 0 && !(a:chunk[0] =~ "^usage")
         call extend(self.lines, a:chunk)
     endif
 endfunction
 
-function! s:NimHighlighter.on_stderr(job, chunk, ...)
+function! s:NimHighlighter.on_stderr(job, chunk, type)
 endfunction
 
 function! Remove(id)
@@ -57,7 +57,7 @@ function! Remove(id)
     endtry
 endfunction
 
-function! s:NimHighlighter.on_exit(...)
+function! s:NimHighlighter.on_exit(job, chunk, type)
     if empty(self.lines) && self.file != expand("%:p")
         return
     endif
@@ -130,13 +130,14 @@ endfunction
 
 
 function! highlighter#guard()
-    if g:nvim_nim_highlighter_enable
+    if g:nvim_nim_highlighter_async
+        call NimHighlight()
+    elseif g:nvim_nim_highlighter_enable
         if line("$") + 0 < 500
             call highlighter#New()
         endif
     endif
 endfunction
-
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

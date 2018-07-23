@@ -101,6 +101,14 @@ if !exists("g:nvim_nim_highlighter_enable")
     let g:nvim_nim_highlighter_enable = 0
 endif
 
+if !exists("g:nvim_nim_highlighter_async")
+    let g:nvim_nim_highlighter_async = 0
+endif
+
+if !exists("g:nvim_nim_deoplete_limit")
+    let g:nvim_nim_deoplete_limit = 100
+endif
+
 if !exists("g:nvim_nim_highlight_builtin")
     let g:nvim_nim_highlight_builtin = 1
 endif
@@ -115,6 +123,20 @@ call highlighter#select_highlights(["skProc", "skTemplate", "skType", "skMacro",
 au BufNewFile,BufRead *.nim setlocal filetype=nim
 au BufNewFile,BufRead *.nims setlocal filetype=nims
 au BufNewFile,BufRead *.nimble setlocal filetype=nims
+
+function! NimHighlighterMatch(key, positions)  " {{{
+    let groups = []
+    for vals in a:positions
+        call add(groups, matchaddpos(a:key, [vals]))
+    endfor
+    return groups
+endfunction  " }}}
+
+function! NimHighlighterUnmatch(keys)  " {{{
+    for key in a:keys
+        call matchdelete(key)
+    endfor
+endfunction  " }}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
